@@ -1,0 +1,27 @@
+# Core ML
+torch>=2.1.0
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+
+# Cheminformatics (SMILES -> molecular graph)
+rdkit>=2023.09
+
+# Transfer learning / pre-trained molecular representations (optional)
+# huggingface_hub>=0.23
+
+# Interpretation
+shap>=0.44
+
+# Metrics & evaluation
+scipy>=1.11
+
+# Plotting
+matplotlib>=3.7
+seaborn>=0.13
+
+# Config
+pyyaml>=6.0
+
+# Dev (install with: pip install -r requirements.txt && pip install -e .[dev])
+pytest>=7.0

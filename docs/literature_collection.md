@@ -48,12 +48,12 @@
 | ★★★ | Molecules (MDPI), 2026 | 10.3390/molecules31071100 | 松木生物炭吸附短/中链 PFAS | ✅ 已下载 + 已提取 24 条数据（`molecules_pinewood_biochar.pdf`） |
 | ★★★ | J. Hazard. Mater., 2023 | 10.1016/j.jhazmat.2023.131047 | 功能化材料增强吸附短链 PFBA | ⏳ bronze OA，无绿色镜像，需图书馆/ScienceDirect |
 | ★★★ | ACS EST Water, 2025 | 10.1021/acsestwater.5c00819 | 活性炭电再生浓缩短链 PFAS | ✅ 已下载（`acs_estwater.pdf`，电再生机制） |
-| ★★ | Water Research, 2019 | 10.1016/j.watres.2019.115381 | 吸附法去除 PFAS（经典） |
-| ★★ | J. Hazard. Mater., 2023 | 10.1016/j.jhazmat.2023.132522 | COF 去除典型 PFAS |
-| ★★ | Small (Wiley), 2025 | 10.1002/smll.202510000 | MOF 捕获短/长链 PFAS |
-| ★★ | J. Mater. Chem. A, 2025 | 10.1039/d5ta07539d | MOF 孔功能化吸附 PFAS |
-| ★ | ACS EST Water, 2025 | 10.1021/acsestwater.5c00343 | 温度对活性炭吸附 PFAS 的影响 |
-| ★ | Chemosphere, 2023 | 10.1016/j.chemosphere.2023.140600 | 水中 PFAS 吸附 |
+| ★★ | Water Research, 2019 | 10.1016/j.watres.2019.115381 | 吸附法去除 PFAS（经典） | ⏳ 机构镜像被 Cloudflare 拦截 |
+| ★★ | J. Hazard. Mater., 2023 | 10.1016/j.jhazmat.2023.132522 | COF 去除典型 PFAS | ⏳ SSRN 预印本被 Cloudflare 拦截 |
+| ★★ | Small (Wiley), 2025 | 10.1002/smll.202510000 | MOF 捕获短/长链 PFAS | ⏳ PMC reCAPTCHA 拦截 |
+| ★★ | J. Mater. Chem. A, 2025 | 10.1039/d5ta07539d | MOF 孔功能化吸附 PFAS | ⏳ 无绿色镜像 |
+| ★★ | ACS EST Water, 2025 | 10.1021/acsestwater.5c00343 | 温度对活性炭吸附 PFAS 的影响 | ✅ 已下载（`acsestwater_temp.pdf`，WUR 镜像；SI 需 ACS 官网） |
+| ★ | Chemosphere, 2023 | 10.1016/j.chemosphere.2023.140600 | 水中 PFAS 吸附 | ⏳ closed OA，需图书馆 |
 
 > 完整 20 篇清单见检索记录；上表为高价值精选。
 

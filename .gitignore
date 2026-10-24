@@ -19,6 +19,10 @@ data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
+# Downloaded papers (copyrighted PDFs; obtain via documented download step)
+data/papers/
+!data/papers/.gitkeep
+
 # Model artifacts
 runs/
 checkpoints/

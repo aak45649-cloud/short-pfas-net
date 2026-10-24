@@ -31,7 +31,7 @@ from shortpfas.data import (  # noqa: E402
     pretrain_finetune_split,
     random_split,
 )
-from shortpfas.data.schema import CONTINUOUS_FEATURES, TARGET_REMOVAL  # noqa: E402
+from shortpfas.data.schema import CONTINUOUS_FEATURES, TARGET_CAPACITY, TARGET_REMOVAL  # noqa: E402
 from shortpfas.models import ShortPFASNet  # noqa: E402
 from shortpfas.utils import compute_regression_metrics  # noqa: E402
 
@@ -85,6 +85,10 @@ def main():
     parser.add_argument("--mode", choices=["single", "transfer"], default="single")
     parser.add_argument("--epochs", type=int, default=None)
     parser.add_argument("--data", default=None, help="path to CSV; uses demo data if omitted")
+    parser.add_argument(
+        "--target", choices=[TARGET_REMOVAL, TARGET_CAPACITY], default=TARGET_REMOVAL,
+        help="target column to predict (removal % or adsorption capacity)",
+    )
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -112,7 +116,7 @@ def main():
     if args.mode == "single":
         splits = random_split(df)
         loaders = {
-            k: build_dataloader(v, TARGET_REMOVAL, batch_size, shuffle=(k == "train"))
+            k: build_dataloader(v, args.target, batch_size, shuffle=(k == "train"))
             for k, v in splits.items()
         }
         model = ShortPFASNet(node_feat_dim, edge_feat_dim, cond_dim, hidden_dim=hidden_dim).to(device)
@@ -133,8 +137,8 @@ def main():
         model = ShortPFASNet(node_feat_dim, edge_feat_dim, cond_dim, hidden_dim=hidden_dim).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
-        pre_train_loader = build_dataloader(splits["pretrain_train"], TARGET_REMOVAL, batch_size, shuffle=True)
-        pre_val_loader = build_dataloader(splits["pretrain_val"], TARGET_REMOVAL, batch_size, shuffle=False)
+        pre_train_loader = build_dataloader(splits["pretrain_train"], args.target, batch_size, shuffle=True)
+        pre_val_loader = build_dataloader(splits["pretrain_val"], args.target, batch_size, shuffle=False)
 
         print(f"== Pre-training on literature data ({len(splits['pretrain_train'])} samples) ==")
         for epoch in range(epochs):
@@ -143,8 +147,8 @@ def main():
                 m = evaluate(model, pre_val_loader, device)
                 print(f"[pretrain] epoch {epoch+1}/{epochs} loss={loss:.4f} val_r2={m['r2']:.3f}")
 
-        ft_train_loader = build_dataloader(splits["finetune_train"], TARGET_REMOVAL, batch_size, shuffle=True)
-        ft_test_loader = build_dataloader(splits["finetune_test"], TARGET_REMOVAL, batch_size, shuffle=False)
+        ft_train_loader = build_dataloader(splits["finetune_train"], args.target, batch_size, shuffle=True)
+        ft_test_loader = build_dataloader(splits["finetune_test"], args.target, batch_size, shuffle=False)
 
         print(f"== Fine-tuning on short-chain data ({len(splits['finetune_train'])} samples) ==")
         ft_epochs = max(1, epochs // 2)

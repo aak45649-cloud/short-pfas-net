@@ -87,15 +87,39 @@ python scripts/train.py --mode transfer      # 迁移学习（预训练+微调�
 | `adsorbent_dose` | 吸附剂投加量 (g/L) | float |
 | `adsorbent_type` | 吸附剂类型 | category |
 | `water_matrix` | 水质背景 | category |
-| `removal_efficiency` | 去除率 (%) | float（目标） |
+| `removal_efficiency` | 去除率 (%) | float（目标之一） |
+| `adsorption_capacity` | 吸附容量 (mg/g) | float（目标之一） |
+
+> 每行至少需要 `removal_efficiency` 或 `adsorption_capacity` 之一作为目标。
 
 然后：
 
 ```bash
+# 预测去除率（默认）
 python scripts/train.py --data /path/to/your.csv --mode transfer
+
+# 预测吸附容量
+python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --mode transfer
 ```
 
 完整字段定义见 `src/shortpfas/data/schema.py`。
+
+### 真实数据接入
+
+本项目已从公开论文提取了两个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
+
+| 数据集 | 来源 | 规模 | 内容 | 复现脚本 |
+|--------|------|------|------|---------|
+| `data/processed/nature_membrane.csv` | Nature Comms 2024 (s41467-024-55320-9) | 534 条 / 21 种 PFAS | 膜去除率，236 条短链 | `scripts/convert_nature_data.py` |
+| `data/processed/molecules_biochar.csv` | Molecules 2026 (molecules31071100) | 24 条 / 5 种短链 PFAS | 生物炭/活性炭吸附容量 | `scripts/convert_molecules_biochar.py` |
+
+论文 PDF 下载（仅开放获取）：
+
+```bash
+python scripts/download_papers.py --doi 10.3390/molecules31071100   # MDPI 走 res.mdpi.com 直链
+```
+
+详见 `docs/data_insights.md`（数据洞察）与 `docs/literature_collection.md`（文献采集清单）。
 
 ## 迁移学习工作流
 
@@ -133,7 +157,7 @@ python scripts/train.py --data /path/to/your.csv --mode transfer
 ## 数据来源与许可
 
 - 演示数据为**合成数据**，仅用于流程验证，不具科学精度，**发表前必须替换为真实数据**。
-- 文献数据引用请遵循原始论文许可。
+- 真实数据来自公开论文（Nature Communications、Molecules），由 `scripts/convert_*.py` 从论文补充材料提取；原始数据版权归原论文所有，引用请遵循原始论文许可。
 - 代码采用 MIT 许可，详见 [LICENSE](LICENSE)。
 
 ## 致谢

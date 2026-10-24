@@ -1,0 +1,3 @@
+﻿pfas_name,smiles,chain_length,initial_concentration,ph,temperature,contact_time,adsorbent_dose,adsorbent_type,water_matrix,removal_efficiency,adsorption_capacity,source_doi
+PFBS,FC(F)(F)CS(=O)(=O)O,4,10.0,7.0,25.0,120.0,0.5,activated_carbon,ultrapure,85.5,17.1,10.1016/j.envres.2022.114286
+PFHxA,FC(F)(F)C(F)(F)C(=O)O,6,5.0,6.5,25.0,180.0,1.0,ion_exchange_resin,surface_water,62.3,3.1,

@@ -36,12 +36,14 @@ class PFASDataset(Dataset):
         self.precomputed_graphs = precomputed_graphs or {}
 
         # Precompute continuous feature statistics for standardization
-        self._cont_mean = {
-            f: float(self.df[f].mean()) for f in self.continuous_features if f in self.df
-        }
-        self._cont_std = {
-            f: float(self.df[f].std()) for f in self.continuous_features if f in self.df
-        }
+        # (skip NaN so missing columns fall back to mean=0, std=1)
+        self._cont_mean = {}
+        self._cont_std = {}
+        for f in self.continuous_features:
+            if f in self.df:
+                col = pd.to_numeric(self.df[f], errors="coerce")
+                self._cont_mean[f] = float(col.mean()) if col.notna().any() else 0.0
+                self._cont_std[f] = float(col.std()) if col.notna().any() else 1.0
 
         # Build category -> index mapping
         self._cat_maps: Dict[str, Dict[str, int]] = {}
@@ -70,7 +72,12 @@ class PFASDataset(Dataset):
             if f in row:
                 mu = self._cont_mean.get(f, 0.0)
                 sd = self._cont_std.get(f, 1.0) or 1.0
-                cont.append((float(row[f]) - mu) / sd)
+                val = row[f]
+                # NaN (missing) -> mean imputation (standardized to 0)
+                if pd.isna(val):
+                    cont.append(0.0)
+                else:
+                    cont.append((float(val) - mu) / sd)
             else:
                 cont.append(0.0)
 

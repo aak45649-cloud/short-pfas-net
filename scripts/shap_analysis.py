@@ -215,6 +215,32 @@ def main() -> int:
     plt.close()
     print(f"已保存: {p5}")
 
+    # ================= 图 6: 部分依赖图 PDP =================
+    # PDP 展示"特征如何影响预测"：在其余特征取平均的背景下，
+    # 单独变动某一特征，观察去除率的平均变化方向与幅度。
+    # 注意：新版 sklearn 默认 centered=True（显示相对均值的偏移），
+    # 这里显式 centered=False，让 y 轴直接是绝对预测去除率（%），更直观。
+    from sklearn.inspection import PartialDependenceDisplay
+
+    # 选 4 个最重要的连续特征做 PDP（官能团是 0/1 二值，也纳入）
+    pdp_features = ["ph", "log_conc", "logp", "chain_length"]
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    PartialDependenceDisplay.from_estimator(
+        model, X, pdp_features,
+        kind="average", ax=axes, grid_resolution=50,
+        centered=False,
+        line_kw={"color": "#d62728", "linewidth": 2},
+    )
+    for ax, col in zip(axes.ravel(), pdp_features):
+        ax.set_xlabel(FEATURE_LABELS.get(col, col), fontsize=11)
+        ax.set_ylabel("Predicted removal (%)", fontsize=11)
+    fig.suptitle("Partial Dependence Plots (PDP) — how features drive removal", fontsize=13, y=1.00)
+    plt.tight_layout()
+    p6 = OUT_DIR / "pdp_top_features.png"
+    plt.savefig(p6, dpi=150, bbox_inches="tight")
+    plt.close()
+    print(f"已保存: {p6}")
+
     # ================= 打印文字结论 =================
     print("\n========== SHAP 分析结论 ==========")
     mean_abs = np.abs(shap_values).mean(axis=0)

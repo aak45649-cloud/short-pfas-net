@@ -50,6 +50,28 @@ class AttentionFusion(nn.Module):
         return mol_emb + attn * cond_emb  # residual gating
 
 
+class DescriptorEncoder(nn.Module):
+    """Small MLP that projects RDKit descriptor priors into embedding space.
+
+    Molecular descriptors (MW, logP, F-count, TPSA, heavy atoms) encode
+    chemical prior knowledge that compensates small-sample overfitting of a
+    pure graph encoder.
+    """
+
+    def __init__(self, input_dim: int, hidden_dim: int = 64, out_dim: int = 64,
+                 dropout: float = 0.1):
+        super().__init__()
+        self.mlp = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, out_dim),
+        )
+
+    def forward(self, descriptors: torch.Tensor) -> torch.Tensor:
+        return self.mlp(descriptors)
+
+
 class ShortPFASNet(nn.Module):
     """Multi-modal model for PFAS removal prediction.
 
@@ -66,6 +88,9 @@ class ShortPFASNet(nn.Module):
             ``dropout > 0`` at inference time).
         num_targets: number of prediction heads (1 = removal only,
             2 = removal + capacity).
+        descriptor_dim: optional RDKit descriptor prior dimension. When > 0,
+            the molecular descriptor prior is fused into the representation
+            (graph + descriptor prior + condition triple fusion).
     """
 
     def __init__(
@@ -77,6 +102,7 @@ class ShortPFASNet(nn.Module):
         gnn_type: str = "gin",
         dropout: float = 0.1,
         num_targets: int = 1,
+        descriptor_dim: int = 0,
     ):
         super().__init__()
         if gnn_type == "gin":
@@ -95,6 +121,12 @@ class ShortPFASNet(nn.Module):
         self.cond_encoder = ConditionEncoder(
             cond_dim, hidden_dim=hidden_dim, out_dim=hidden_dim, dropout=dropout
         )
+        self.descriptor_dim = descriptor_dim
+        self.descriptor_encoder = (
+            DescriptorEncoder(descriptor_dim, hidden_dim=hidden_dim,
+                              out_dim=hidden_dim, dropout=dropout)
+            if descriptor_dim > 0 else None
+        )
         self.fusion = AttentionFusion(hidden_dim)
         self.head = nn.Sequential(
             nn.Linear(hidden_dim, hidden_dim),
@@ -110,8 +142,14 @@ class ShortPFASNet(nn.Module):
         edge_features: torch.Tensor,
         batch: torch.Tensor,
         conditions: torch.Tensor,
+        descriptors: Optional[torch.Tensor] = None,
     ) -> torch.Tensor:
         mol_emb = self.graph_encoder(node_features, edge_index, edge_features, batch)
+        # Inject descriptor prior into the molecular representation via a
+        # learnable gate, so graph learning has prior knowledge to lean on.
+        if self.descriptor_encoder is not None and descriptors is not None:
+            desc_emb = self.descriptor_encoder(descriptors)
+            mol_emb = mol_emb + desc_emb
         cond_emb = self.cond_encoder(conditions)
         fused = self.fusion(mol_emb, cond_emb)
         return self.head(fused)  # (B, num_targets)
@@ -124,6 +162,7 @@ class ShortPFASNet(nn.Module):
         batch: torch.Tensor,
         conditions: torch.Tensor,
         n_samples: int = 30,
+        descriptors: Optional[torch.Tensor] = None,
     ) -> Dict[str, torch.Tensor]:
         """MC Dropout uncertainty: run forward pass n_samples times.
 
@@ -135,7 +174,8 @@ class ShortPFASNet(nn.Module):
         with torch.no_grad():
             for _ in range(n_samples):
                 preds.append(
-                    self.forward(node_features, edge_index, edge_features, batch, conditions)
+                    self.forward(node_features, edge_index, edge_features, batch,
+                                 conditions, descriptors)
                 )
         stack = torch.stack(preds, dim=0)  # (n_samples, B, num_targets)
         mean = stack.mean(0)

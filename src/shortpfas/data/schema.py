@@ -33,6 +33,18 @@ CONTINUOUS_FEATURES = [
 ]
 
 # ---------------------------------------------------------------------------
+# Molecular descriptor priors (RDKit) — chemical prior knowledge injected
+# alongside the learned graph representation to compensate small samples.
+# ---------------------------------------------------------------------------
+DESCRIPTOR_FEATURES = [
+    "molecular_weight",   # MolWt (g/mol)
+    "logp",               # MolLogP (octanol/water)
+    "n_fluorine",         # number of F atoms (perfluorination degree)
+    "tpsa",               # topological polar surface area (Å²)
+    "n_heavy_atoms",      # heavy-atom count (molecular size)
+]
+
+# ---------------------------------------------------------------------------
 # Categorical features and their canonical levels
 # ---------------------------------------------------------------------------
 CATEGORICAL_FEATURES = {

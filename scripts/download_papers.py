@@ -98,21 +98,42 @@ def mdpi_pdf_url(doi: str) -> str | None:
 
         https://res.mdpi.com/d_attachment/<journal>/<journal>-<vol>-<issue0>/article_deploy/<journal>-<vol>-<issue0>.pdf
 
-    MDPI DOIs use the form 10.3390/<journal><vol><issue><article> where the
-    trailing 8 digits are vol(2) + issue(2) + article(4). The CDN URL uses the
-    article number zero-padded to 5 digits, and omits the issue. Example:
-        10.3390/molecules31071100
-            journal = "molecules", vol = "31", issue = "07", article = 1100
-        -> https://res.mdpi.com/d_attachment/molecules/molecules-31-01100/article_deploy/molecules-31-01100.pdf
+    MDPI DOIs use 10.3390/<abbrev><vol2><issue2><article4> (issue may be folded
+    into a 6-digit article for some journals). The res.mdpi.com CDN path uses the
+    journal FULL name and the article number zero-padded to 5 digits. The
+    abbreviation is NOT the CDN folder name except when it equals the full name
+    (e.g. "molecules", "separations"). Examples:
+        10.3390/molecules31071100  -> molecules/molecules-31-01100/.../molecules-31-01100.pdf
+        10.3390/su18147053         -> sustainability/sustainability-18-07053/.../sustainability-18-07053.pdf
     """
     import re
+
+    # Journal abbreviation -> full CDN folder name (MDPI journal names).
+    JOURNAL_FULL = {
+        "su": "sustainability",
+        "w": "water",
+        "ma": "materials",
+        "fib": "fibers",
+        "ijms": "ijms",
+        "nanomaterials": "nanomaterials",
+        "molecules": "molecules",
+        "separations": "separations",
+        "toxics": "toxics",
+        "polymers": "polymers",
+        "colloids": "colloids",
+        "cleantechnol": "cleantechnologies",
+        "environments": "environments",
+        "processes": "processes",
+    }
+
     m = re.match(r"10\.3390/([a-z]+)(\d{2})(\d{2})(\d{4})", doi)
     if not m:
         return None
-    journal, vol, _issue, article = m.group(1), m.group(2), m.group(3), m.group(4)
+    abbrev, vol, _issue, article = m.groups()
+    full = JOURNAL_FULL.get(abbrev, abbrev)  # fall back to abbreviation
     article5 = f"{int(article):05d}"  # zero-pad article number to 5 digits
-    stem = f"{journal}-{vol}-{article5}"
-    return f"https://res.mdpi.com/d_attachment/{journal}/{stem}/article_deploy/{stem}.pdf"
+    stem = f"{full}-{vol}-{article5}"
+    return f"https://res.mdpi.com/d_attachment/{full}/{stem}/article_deploy/{stem}.pdf"
 
 
 def main():

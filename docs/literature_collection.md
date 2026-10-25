@@ -55,6 +55,18 @@
 | ★★ | ACS EST Water, 2025 | 10.1021/acsestwater.5c00343 | 温度对活性炭吸附 PFAS 的影响 | ✅ 已下载（`acsestwater_temp.pdf`，WUR 镜像；SI 需 ACS 官网） |
 | ★ | Chemosphere, 2023 | 10.1016/j.chemosphere.2023.140600 | 水中 PFAS 吸附 | ⏳ closed OA，需图书馆 |
 
+## 第三批：MDPI 多吸附剂数据（2026-10-25 新增，全部已下载）
+
+| 期刊/年份 | DOI | 关键内容 | 提取状态 |
+|----------|-----|---------|---------|
+| Nat Commun, 2024 | 10.1038/s41467-024-52690-y | 氟聚合物 PFPE-IEX+ 树脂吸附 11 种 PFAS（含短链） | ✅ 已提取 6 条（`fluoropolymer_sorbent.csv`） |
+| Sustainability, 2026 | 10.3390/su18147053 | 石墨烯吸附 PFHxA（短链，4 种水基质） | ✅ 已提取 20 条（`graphene_pfhxa.csv`） |
+| Water, 2026 | 10.3390/w18151869 | IRA900 树脂多组分竞争吸附 10 种 PFAS | ✅ 已提取 10 条（`ix_resin_competitive.csv`） |
+| Materials, 2024 | 10.3390/ma17174169 | 松木/椰枣生物炭吸附 6 种 PFAS | ⏳ SI 仅 Freundlich KF（不可比单位），暂不提取 |
+| Separations, 2026 | 10.3390/separations13100276 | 先进生物炭去短链 PFAS | ⏳ perspective 综述，无原始数据 |
+| Fibers, 2025 | 10.3390/fib13040042 | PANI 纳米纤维吸附 GenX | 📥 已下载，待评估 |
+| Clean Technologies, 2026 | 10.3390/cleantechnol8010021 | 改性沸石吸附 PFAS | ⏳ 期刊全名映射待补 |
+
 > 完整 20 篇清单见检索记录；上表为高价值精选。
 
 ---

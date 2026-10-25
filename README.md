@@ -106,12 +106,17 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 
 ### 真实数据接入
 
-本项目已从公开论文提取了两个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
+本项目已从公开论文提取了五个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
 
 | 数据集 | 来源 | 规模 | 内容 | 复现脚本 |
 |--------|------|------|------|---------|
 | `data/processed/nature_membrane.csv` | Nature Comms 2024 (s41467-024-55320-9) | 534 条 / 21 种 PFAS | 膜去除率，236 条短链 | `scripts/convert_nature_data.py` |
 | `data/processed/molecules_biochar.csv` | Molecules 2026 (molecules31071100) | 24 条 / 5 种短链 PFAS | 生物炭/活性炭吸附容量 | `scripts/convert_molecules_biochar.py` |
+| `data/processed/fluoropolymer_sorbent.csv` | Nat Commun 2024 (s41467-024-52690-y) | 6 条 / 6 种 PFAS | 氟聚合物树脂吸附容量，4 条短链 | `scripts/convert_fluoropolymer_sorbent.py` |
+| `data/processed/graphene_pfhxa.csv` | Sustainability 2026 (su18147053) | 20 条 / PFHxA | 石墨烯吸附容量，20 条短链，4 种水基质 | `scripts/convert_graphene_pfhxa.py` |
+| `data/processed/ix_resin_competitive.csv` | Water 2026 (w18151869) | 10 条 / 10 种 PFAS | IX 树脂竞争吸附容量，6 条短链 | `scripts/convert_ix_resin_competitive.py` |
+
+> 总计 594 条（去除率 534 + 吸附容量 60），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂五类吸附剂。
 
 论文 PDF 下载（仅开放获取）：
 

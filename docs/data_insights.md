@@ -71,21 +71,43 @@
 > 该数据解决了 `nature_membrane.csv` 的"单一膜吸附剂"局限，首次提供活性炭/生物炭对比，
 > 且目标变量为吸附容量（而非去除率），可支撑多目标建模。
 
-## 六、已交付的自动化工具
+## 六、多吸附剂扩样本（2026-10-25 新增）
+
+本次系统扩充了**吸附容量目标**的多样吸附剂数据，共新增 3 个数据源、36 条（全部含短链）：
+
+| 数据文件 | 来源 | 条数 | 吸附剂类型 | 短链占比 | 关键发现 |
+|---------|------|------|-----------|---------|---------|
+| `fluoropolymer_sorbent.csv` | Nat Commun 2024 (PFPE-IEX+) | 6 | 离子交换树脂 | 4/6 | 全氟聚醚树脂对短链容量高达 524–844 mg/g，远超常规 |
+| `graphene_pfhxa.csv` | Sustainability 2026 (石墨烯) | 20 | 纳米吸附剂 | 20/20 | 石墨烯对 PFHxA 容量 0.02–25.6 mg/g，引入 4 种水基质 |
+| `ix_resin_competitive.csv` | Water 2026 (IRA900) | 10 | 离子交换树脂 | 6/10 | 多组分竞争下短链 qm 显著低于长链（0.0017–0.0062 mg/g） |
+
+**总数据规模：594 条**（nature_membrane 534 + 吸附容量 60）。
+
+### 关键突破：MDPI 期刊全名直链
+- MDPI 新论文 CDN 路径用的是**期刊全名**（如 `sustainability`、`materials`），
+  而非 DOI 缩写（`su`、`ma`）。已固化进 `download_papers.py` 的 `JOURNAL_FULL` 映射。
+- 补充材料直链格式：`res.mdpi.com/d_attachment/<full>/<full>-<vol>-<article>/article_deploy/<full>-<vol>-<article>-s001.zip`
+
+### 吸附剂类型多样性进展
+当前吸附容量目标数据覆盖：**膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂** 五类，
+打破了此前"单一膜吸附剂"的局限，为迁移学习制造了真正的领域差异（正是
+`transfer_experiment.md` 第七节诊断所缺的条件）。
+
+### 暂不提取的数据源（已评估）
+- `ma17174169`（Materials 2024，生物炭）：SI Table S4 只给 Freundlich KF 参数（异质单位），
+  无法换算成 mg/g 吸附容量，暂不入库。
+- `separations13100276`（Separations 2026）：perspective 综述，无原始实验数据。
+- `colloids_short_vs_long`（Colloids 2026）：定性综述。
+
+## 七、已交付的自动化工具
 
 | 工具 | 用途 |
 |------|------|
-| `scripts/download_papers.py` | OpenAlex 查 OA 状态 + 下载 OA 论文（含 MDPI CDN 直链突破） |
+| `scripts/download_papers.py` | OpenAlex 查 OA 状态 + 下载 OA 论文（含 MDPI 期刊全名直链突破） |
 | `scripts/extract_pdf_text.py` | PDF → 文本，用于定位数据表格 |
 | `scripts/convert_nature_data.py` | Nature 补充材料 → 项目标准 CSV |
 | `scripts/convert_molecules_biochar.py` | Molecules 生物炭数据 → 项目标准 CSV（吸附容量目标） |
-| `scripts/validate_data.py` | 校验数据格式与 SMILES |
-
-## 五、已交付的自动化工具
-
-| 工具 | 用途 |
-|------|------|
-| `scripts/download_papers.py` | OpenAlex 查 OA 状态 + 下载 OA 论文 |
-| `scripts/extract_pdf_text.py` | PDF → 文本，用于定位数据表格 |
-| `scripts/convert_nature_data.py` | Nature 补充材料 → 项目标准 CSV |
+| `scripts/convert_fluoropolymer_sorbent.py` | 氟聚合物树脂数据 → 项目标准 CSV（吸附容量目标） |
+| `scripts/convert_graphene_pfhxa.py` | 石墨烯 PFHxA 数据 → 项目标准 CSV（吸附容量目标） |
+| `scripts/convert_ix_resin_competitive.py` | IX 树脂竞争吸附数据 → 项目标准 CSV（吸附容量目标） |
 | `scripts/validate_data.py` | 校验数据格式与 SMILES |

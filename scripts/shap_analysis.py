@@ -215,26 +215,31 @@ def main() -> int:
     plt.close()
     print(f"已保存: {p5}")
 
-    # ================= 图 6: 部分依赖图 PDP =================
-    # PDP 展示"特征如何影响预测"：在其余特征取平均的背景下，
-    # 单独变动某一特征，观察去除率的平均变化方向与幅度。
-    # 注意：新版 sklearn 默认 centered=True（显示相对均值的偏移），
-    # 这里显式 centered=False，让 y 轴直接是绝对预测去除率（%），更直观。
+    # ================= 图 6: 部分依赖图 PDP + ICE =================
+    # 标准 sklearn 风格：灰色细线是每个样本的 ICE（个体条件期望），
+    # 加粗的蓝色实线是 PDP 平均曲线，底部 rug 是数据分布刻度。
+    # kind="both" 同时画 ICE + 平均线，是论文/官方文档的经典样式。
     from sklearn.inspection import PartialDependenceDisplay
 
-    # 选 4 个最重要的连续特征做 PDP（官能团是 0/1 二值，也纳入）
     pdp_features = ["ph", "log_conc", "logp", "chain_length"]
-    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    fig, axes = plt.subplots(2, 2, figsize=(13, 9))
     PartialDependenceDisplay.from_estimator(
         model, X, pdp_features,
-        kind="average", ax=axes, grid_resolution=50,
+        kind="both",
+        ax=axes,
+        grid_resolution=50,
         centered=False,
-        line_kw={"color": "#d62728", "linewidth": 2},
+        subsample=200,            # 限制 ICE 线数量，避免过密
+        random_state=42,
+        pd_line_kw={"color": "#1f77b4", "linewidth": 2.5},   # 平均线：蓝色加粗
+        ice_lines_kw={"color": "#9ecae1", "linewidth": 0.5, "alpha": 0.4},  # ICE：浅蓝细线
     )
     for ax, col in zip(axes.ravel(), pdp_features):
         ax.set_xlabel(FEATURE_LABELS.get(col, col), fontsize=11)
         ax.set_ylabel("Predicted removal (%)", fontsize=11)
-    fig.suptitle("Partial Dependence Plots (PDP) — how features drive removal", fontsize=13, y=1.00)
+        ax.set_ylim(40, 105)      # 统一 y 轴，便于跨子图对比
+        ax.grid(alpha=0.25)
+    fig.suptitle("Partial Dependence Plots (ICE + PDP)", fontsize=14, y=0.99)
     plt.tight_layout()
     p6 = OUT_DIR / "pdp_top_features.png"
     plt.savefig(p6, dpi=150, bbox_inches="tight")

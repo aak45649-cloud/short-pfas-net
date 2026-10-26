@@ -121,7 +121,9 @@ def mdpi_pdf_url(doi: str) -> str | None:
         "toxics": "toxics",
         "polymers": "polymers",
         "colloids": "colloids",
-        "cleantechnol": "cleantechnologies",
+        # NOTE: Clean Technologies CDN folder keeps the ABBREVIATION "cleantechnol"
+        # (not the full name), unlike most other journals.
+        "cleantechnol": "cleantechnol",
         "environments": "environments",
         "processes": "processes",
     }

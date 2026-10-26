@@ -82,7 +82,28 @@
 | `ix_resin_competitive.csv` | Water 2026 (IRA900) | 10 | 离子交换树脂 | 6/10 | 多组分竞争下短链 qm 显著低于长链（0.0017–0.0062 mg/g） |
 | `polyaniline_nanofiber_genx.csv` | Fibers 2025 (PANI-ESPAN) | 3 | 纳米吸附剂 | 3/3 | 聚苯胺纳米纤维对 GenX 最大容量 146 mg/g；pH=6 去除率 98% > pH=3 的 78% |
 
-**总数据规模：597 条**（nature_membrane 534 + 吸附容量 61）。
+**总数据规模：640 条**（去除率 579 + 吸附容量 61）。
+
+## 六·续、改性沸石数据（第七来源，2026-10-26 新增）
+
+从 Clean Technologies 2026 (cleantechnol8010021) 提取改性斜发沸石 vs GAC 的 PFAS 去除率数据：
+
+- **文件**：`data/processed/modified_zeolite.csv`
+- **规模**：43 条（12 条短链 PFBA + 31 条长链 PFOA），目标 = 去除率
+- **吸附剂多样性**：17 种表面改性沸石（酸洗 / Fe³⁺ / La³⁺ / APTES 氨基硅烷 / DTMS 疏水硅烷 / 双硅烷共接枝 / GO 涂层）+ 2 种 GAC 基准
+- **引入全新类别**：schema 新增 `zeolite` 吸附剂类型（此前为空白）
+- **实验条件**：100 ppb 与 1 ppm 两档浓度、单组分 + 三组分混合（PFBA/PFOA/PFTDA）、1 h、室温、Milli-Q 水
+
+**关键发现（极具价值的负样本）**：
+- 改性沸石对短链 PFBA 去除率**普遍 ≤ 25%**（原始沸石仅 17%，最好不过 24%），
+  而 GAC 对 PFBA 达 98%——为模型提供了稀缺的"短链难去除"低值样本，显著缓解去除率右偏。
+- 双硅烷（APTES+DTMS）共接枝沸石对 PFOA 去除率可达 78–93%，逼近 GAC（97%），
+  但对 PFBA 几乎无改善，印证"链长强依赖"的机制。
+- 物理混合（分离功能颗粒）远逊于同颗粒共接枝（35% vs 93% @1 ppm PFOA），
+  证明"双功能需共定位"的机理。
+
+> 该数据源首次让去除率目标出现**系统性的低值区**（4%–25%），
+> 直接补充了 nature_membrane 高度右偏（均值 93%）所缺失的区分度。
 
 ### 关键突破：MDPI 期刊全名直链
 - MDPI 新论文 CDN 路径用的是**期刊全名**（如 `sustainability`、`materials`），
@@ -90,7 +111,7 @@
 - 补充材料直链格式：`res.mdpi.com/d_attachment/<full>/<full>-<vol>-<article>/article_deploy/<full>-<vol>-<article>-s001.zip`
 
 ### 吸附剂类型多样性进展
-当前吸附容量目标数据覆盖：**膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂** 五类，
+当前去除率/吸附容量目标数据覆盖：**膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石** 六类，
 打破了此前"单一膜吸附剂"的局限，为迁移学习制造了真正的领域差异（正是
 `transfer_experiment.md` 第七节诊断所缺的条件）。
 
@@ -112,4 +133,5 @@
 | `scripts/convert_graphene_pfhxa.py` | 石墨烯 PFHxA 数据 → 项目标准 CSV（吸附容量目标） |
 | `scripts/convert_ix_resin_competitive.py` | IX 树脂竞争吸附数据 → 项目标准 CSV（吸附容量目标） |
 | `scripts/convert_polyaniline_nanofiber.py` | PANI 纳米纤维吸附 GenX 数据 → 项目标准 CSV（容量+去除率） |
+| `scripts/convert_modified_zeolite.py` | 改性沸石 vs GAC 去除率数据 → 项目标准 CSV（去除率目标，含 zeolite 新类别） |
 | `scripts/validate_data.py` | 校验数据格式与 SMILES |

@@ -106,7 +106,7 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 
 ### 真实数据接入
 
-本项目已从公开论文提取了六个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
+本项目已从公开论文提取了七个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
 
 | 数据集 | 来源 | 规模 | 内容 | 复现脚本 |
 |--------|------|------|------|---------|
@@ -116,8 +116,9 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 | `data/processed/graphene_pfhxa.csv` | Sustainability 2026 (su18147053) | 20 条 / PFHxA | 石墨烯吸附容量，20 条短链，4 种水基质 | `scripts/convert_graphene_pfhxa.py` |
 | `data/processed/ix_resin_competitive.csv` | Water 2026 (w18151869) | 10 条 / 10 种 PFAS | IX 树脂竞争吸附容量，6 条短链 | `scripts/convert_ix_resin_competitive.py` |
 | `data/processed/polyaniline_nanofiber_genx.csv` | Fibers 2025 (fib13040042) | 3 条 / GenX | PANI 纳米纤维吸附容量 1 条 + 去除率 2 条 | `scripts/convert_polyaniline_nanofiber.py` |
+| `data/processed/modified_zeolite.csv` | Clean Technol. 2026 (cleantechnol8010021) | 43 条 / PFBA+PFOA | 改性沸石 vs GAC 去除率，12 条短链 | `scripts/convert_modified_zeolite.py` |
 
-> 总计 597 条（去除率 536 + 吸附容量 61），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂五类吸附剂。
+> 总计 640 条（去除率 579 + 吸附容量 61），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石六类吸附剂。
 
 论文 PDF 下载（仅开放获取）：
 

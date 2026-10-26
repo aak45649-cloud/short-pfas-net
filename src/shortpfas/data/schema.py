@@ -54,6 +54,7 @@ CATEGORICAL_FEATURES = {
         "biochar",
         "nanoadsorbent",
         "membrane",
+        "zeolite",
         "other",
     ],
     "water_matrix": [

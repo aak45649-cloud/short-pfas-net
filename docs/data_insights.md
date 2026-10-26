@@ -80,8 +80,9 @@
 | `fluoropolymer_sorbent.csv` | Nat Commun 2024 (PFPE-IEX+) | 6 | 离子交换树脂 | 4/6 | 全氟聚醚树脂对短链容量高达 524–844 mg/g，远超常规 |
 | `graphene_pfhxa.csv` | Sustainability 2026 (石墨烯) | 20 | 纳米吸附剂 | 20/20 | 石墨烯对 PFHxA 容量 0.02–25.6 mg/g，引入 4 种水基质 |
 | `ix_resin_competitive.csv` | Water 2026 (IRA900) | 10 | 离子交换树脂 | 6/10 | 多组分竞争下短链 qm 显著低于长链（0.0017–0.0062 mg/g） |
+| `polyaniline_nanofiber_genx.csv` | Fibers 2025 (PANI-ESPAN) | 3 | 纳米吸附剂 | 3/3 | 聚苯胺纳米纤维对 GenX 最大容量 146 mg/g；pH=6 去除率 98% > pH=3 的 78% |
 
-**总数据规模：594 条**（nature_membrane 534 + 吸附容量 60）。
+**总数据规模：597 条**（nature_membrane 534 + 吸附容量 61）。
 
 ### 关键突破：MDPI 期刊全名直链
 - MDPI 新论文 CDN 路径用的是**期刊全名**（如 `sustainability`、`materials`），
@@ -110,4 +111,5 @@
 | `scripts/convert_fluoropolymer_sorbent.py` | 氟聚合物树脂数据 → 项目标准 CSV（吸附容量目标） |
 | `scripts/convert_graphene_pfhxa.py` | 石墨烯 PFHxA 数据 → 项目标准 CSV（吸附容量目标） |
 | `scripts/convert_ix_resin_competitive.py` | IX 树脂竞争吸附数据 → 项目标准 CSV（吸附容量目标） |
+| `scripts/convert_polyaniline_nanofiber.py` | PANI 纳米纤维吸附 GenX 数据 → 项目标准 CSV（容量+去除率） |
 | `scripts/validate_data.py` | 校验数据格式与 SMILES |

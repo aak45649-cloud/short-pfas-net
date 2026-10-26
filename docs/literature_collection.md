@@ -64,7 +64,7 @@
 | Water, 2026 | 10.3390/w18151869 | IRA900 树脂多组分竞争吸附 10 种 PFAS | ✅ 已提取 10 条（`ix_resin_competitive.csv`） |
 | Materials, 2024 | 10.3390/ma17174169 | 松木/椰枣生物炭吸附 6 种 PFAS | ⏳ SI 仅 Freundlich KF（不可比单位），暂不提取 |
 | Separations, 2026 | 10.3390/separations13100276 | 先进生物炭去短链 PFAS | ⏳ perspective 综述，无原始数据 |
-| Fibers, 2025 | 10.3390/fib13040042 | PANI 纳米纤维吸附 GenX | 📥 已下载，待评估 |
+| Fibers, 2025 | 10.3390/fib13040042 | PANI 纳米纤维吸附 GenX | ✅ 已提取 3 条（`polyaniline_nanofiber_genx.csv`） |
 | Clean Technologies, 2026 | 10.3390/cleantechnol8010021 | 改性沸石吸附 PFAS | ⏳ 期刊全名映射待补 |
 
 > 完整 20 篇清单见检索记录；上表为高价值精选。

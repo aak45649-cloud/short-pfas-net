@@ -106,7 +106,7 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 
 ### 真实数据接入
 
-本项目已从公开论文提取了二十五个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
+本项目已从公开论文提取了二十八个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
 
 | 数据集 | 来源 | 规模 | 内容 | 复现脚本 |
 |--------|------|------|------|---------|
@@ -135,8 +135,11 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 | `data/processed/gac_f400_competitive.csv` | J. Hazard. Mater. 2023 (132378) | 3 条 / PFBS+4:2FTS+PFBA | GAC F400 单溶质平衡容量 | `scripts/convert_gac_f400_competitive.py` |
 | `data/processed/cacbm_pfas.csv` | ACS EST Water 2025 (acsestwater.5c00641) | 4 条 / PFBA+PFBS | 球磨胶体活性炭 Langmuir + PSO 容量 | `scripts/convert_cacbm_pfas.py` |
 | `data/processed/fsfac_pfbs.csv` | Chem. Eng. J. 2026 (176796) | 4 条 / PFBS | 氟化超细活性炭 PFBS 去除率 | `scripts/convert_fsfac_pfbs.py` |
+| `data/processed/nf_mac_pfpea_pfhxa.csv` | J. Water Process Eng. 2024 (105585) | 10 条 / PFPeA+PFHxA | NF 膜去除率 + PAC/MAC Langmuir qm + PSO qe | `scripts/convert_nf_mac_pfpea_pfhxa.py` |
+| `data/processed/sn_porous_carbon.csv` | J. Hazard. Mater. 2026 (141781) | 12 条 / PFBA+PFBS | S/N 功能化多孔碳 Langmuir-Freundlich qm 与 Qe | `scripts/convert_sn_porous_carbon.py` |
+| `data/processed/magnetic_polymer_sorbent.csv` | Adv. Mater. 2026 (e02427) | 4 条 / PFBA+PFPeA+PFBS+PFHxS | 非 PFAS 磁性聚合物吸附剂渗滤液去除率 | `scripts/convert_magnetic_polymer_sorbent.py` |
 
-> 总计 735 条（去除率 620 + 吸附容量 130，短链 391 条），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石 / MOF / 聚合物网络 / 蛋白基吸附剂 / 微塑料等吸附剂，以及 PFBA/PFBS/PFPeA/PFPeS/PFHxA/PFHxS/GenX/4:2FTS 等核心短链物质。
+> 总计 761 条（去除率 626 + 吸附容量 150，短链 417 条），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石 / MOF / 聚合物网络 / 蛋白基吸附剂 / 微塑料等吸附剂，以及 PFBA/PFBS/PFPeA/PFPeS/PFHxA/PFHxS/GenX/4:2FTS 等核心短链物质。
 
 论文 PDF 下载（仅开放获取）：
 

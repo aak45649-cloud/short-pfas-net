@@ -90,6 +90,9 @@
 | 0004 | J. Hazard. Mater., 2023 (10.1016/j.jhazmat.2023.132378) | GAC F400 单溶质吸附短链 PFAS | ✅ 已提取 3 条（`gac_f400_competitive.csv`，全短链，活性炭类；PFBS/4:2FTS/PFBA 平衡容量） |
 | 0274 | ACS EST Water, 2025 (10.1021/acsestwater.5c00641) | 球磨胶体活性炭（CACBM）吸附 PFBA/PFBS | ✅ 已提取 4 条（`cacbm_pfas.csv`，全短链，活性炭类；Langmuir + PSO 容量） |
 | 0107 | Chem. Eng. J., 2026 (10.1016/j.cej.2026.176796) | 氟化超细活性炭（FSFAC）PFBS 去除率 | ✅ 已提取 4 条（`fsfac_pfbs.csv`，全短链，活性炭类；70–90% 去除率） |
+| 0054 | J. Water Process Eng., 2024 (10.1016/j.jwpe.2024.105585) | NF dNF40 + PAC/MAC 去除 PFHxA/PFPeA | ✅ 已提取 10 条（`nf_mac_pfpea_pfhxa.csv`，全短链；NF 去除率 + Langmuir qm 174–332 mg/g + PSO qe） |
+| 0287 | J. Hazard. Mater., 2026 (10.1016/j.jhazmat.2026.141781) | S/N 功能化多孔碳吸附 PFBA/PFBS | ✅ 已提取 12 条（`sn_porous_carbon.csv`，全短链；Langmuir-Freundlich qm 0.15–0.736 mmol/g） |
+| 2038 | Adv. Mater., 2026 (10.1002/adma.202502427) | 非 PFAS 磁性聚合物吸附剂去除渗滤液 PFAS | ✅ 已提取 4 条（`magnetic_polymer_sorbent.csv`，全短链；PFBA 65.7%–PFHxS 99.7%） |
 
 ---
 

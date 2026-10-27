@@ -93,6 +93,7 @@
 | 0054 | J. Water Process Eng., 2024 (10.1016/j.jwpe.2024.105585) | NF dNF40 + PAC/MAC 去除 PFHxA/PFPeA | ✅ 已提取 10 条（`nf_mac_pfpea_pfhxa.csv`，全短链；NF 去除率 + Langmuir qm 174–332 mg/g + PSO qe） |
 | 0287 | J. Hazard. Mater., 2026 (10.1016/j.jhazmat.2026.141781) | S/N 功能化多孔碳吸附 PFBA/PFBS | ✅ 已提取 12 条（`sn_porous_carbon.csv`，全短链；Langmuir-Freundlich qm 0.15–0.736 mmol/g） |
 | 2038 | Adv. Mater., 2026 (10.1002/adma.202502427) | 非 PFAS 磁性聚合物吸附剂去除渗滤液 PFAS | ✅ 已提取 4 条（`magnetic_polymer_sorbent.csv`，全短链；PFBA 65.7%–PFHxS 99.7%） |
+| 0099 | Adv. Sci., 2026 (10.1002/advs.76133) | PPy@P-CF 导电碳布捕集 TFA/PFBA/GenX | ✅ 已提取 3 条（`ppy_carbon_cloth.csv`，全短链；Langmuir qm 283.2/572.1/510.2 mg/g） |
 
 ---
 

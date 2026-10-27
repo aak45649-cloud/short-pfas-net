@@ -69,6 +69,20 @@
 
 > 完整 20 篇清单见检索记录；上表为高价值精选。
 
+## 第四批：本地文献库（600 篇 PDF）逐步提取（2026-10-26 起）
+
+从用户本地下载的 600 篇近 5 年短链 PFAS 全文库中，按「聚焦特定短链 PFAS」策略逐步提取。
+高价值候选 30 篇经正则预扫描后，优先提取明确含 `mg/g` 吸附容量 / 去除率数值的论文。
+
+| # | 论文（期刊/年份） | 关键内容 | 提取状态 |
+|---|------|---------|---------|
+| 583 | Gels, 2026 (10.3390/gels12010014) | 季铵化壳聚糖水凝胶 CG/QCG/MQCG 吸附 PFOS/PFOA/PFBS/PFHxA | ✅ 已提取 12 条（`quaternized_chitosan.csv`，短链 6 条，离子交换树脂类） |
+| 654 | Small, 2025 (10.1002/smll.202510000) | Cu-hismox MOF SPE 捕集短链 PFBA/PFBS/PFPeS/PFHxA/PFHxS | ✅ 已提取 7 条（`cu_hismox_mof.csv`，全短链，纳米吸附剂类） |
+| 1653 | npj Clean Water, 2025 (10.1038/s41545-025-00519-6) | β-CD-TriPod 环糊精聚合物捕集 PFBS（Langmuir 246 mg/g）+ 9 种 PFAS | ✅ 已提取 8 条（`beta_cd_tripod.csv`，短链 6 条，纳米吸附剂类） |
+| 1511 | Toxics, 2026 (10.3390/toxics14030204) | 香蕉皮 ZnCl2 石墨化生物炭去除 PFBA/PFBS/PFHxA/GenX | ✅ 已提取 9 条（`banana_peel_biochar.csv`，全短链，生物炭类） |
+| 238 | RSC Adv., 2026 | 椰壳活性炭 EDA/CTAB 改性吸附短链 PFBA/PFHxA | ⏸ 短链容量/去除率在 SI 图中（正文仅长链 PFOSA 精确值），待补 SI |
+| 124 | Environ. Pollut., 2024 | AER + UV/亚硫酸盐吸附降解 PFPrA/PFHxA/GenX | ⏸ 短链数值在正文图中（无精确表格值），跳过 |
+
 ---
 
 ## 常见短链 PFAS 的 SMILES（可直接复制）

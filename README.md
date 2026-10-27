@@ -106,19 +106,26 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 
 ### 真实数据接入
 
-本项目已从公开论文提取了七个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
+本项目已从公开论文提取了十四个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
 
 | 数据集 | 来源 | 规模 | 内容 | 复现脚本 |
 |--------|------|------|------|---------|
 | `data/processed/nature_membrane.csv` | Nature Comms 2024 (s41467-024-55320-9) | 534 条 / 21 种 PFAS | 膜去除率，236 条短链 | `scripts/convert_nature_data.py` |
-| `data/processed/molecules_biochar.csv` | Molecules 2026 (molecules31071100) | 24 条 / 5 种短链 PFAS | 生物炭/活性炭吸附容量 | `scripts/convert_molecules_biochar.py` |
-| `data/processed/fluoropolymer_sorbent.csv` | Nat Commun 2024 (s41467-024-52690-y) | 6 条 / 6 种 PFAS | 氟聚合物树脂吸附容量，4 条短链 | `scripts/convert_fluoropolymer_sorbent.py` |
-| `data/processed/graphene_pfhxa.csv` | Sustainability 2026 (su18147053) | 20 条 / PFHxA | 石墨烯吸附容量，20 条短链，4 种水基质 | `scripts/convert_graphene_pfhxa.py` |
-| `data/processed/ix_resin_competitive.csv` | Water 2026 (w18151869) | 10 条 / 10 种 PFAS | IX 树脂竞争吸附容量，6 条短链 | `scripts/convert_ix_resin_competitive.py` |
-| `data/processed/polyaniline_nanofiber_genx.csv` | Fibers 2025 (fib13040042) | 3 条 / GenX | PANI 纳米纤维吸附容量 1 条 + 去除率 2 条 | `scripts/convert_polyaniline_nanofiber.py` |
 | `data/processed/modified_zeolite.csv` | Clean Technol. 2026 (cleantechnol8010021) | 43 条 / PFBA+PFOA | 改性沸石 vs GAC 去除率，12 条短链 | `scripts/convert_modified_zeolite.py` |
+| `data/processed/molecules_biochar.csv` | Molecules 2026 (molecules31071100) | 24 条 / 5 种短链 PFAS | 生物炭/活性炭吸附容量 | `scripts/convert_molecules_biochar.py` |
+| `data/processed/graphene_pfhxa.csv` | Sustainability 2026 (su18147053) | 20 条 / PFHxA | 石墨烯吸附容量，20 条短链，4 种水基质 | `scripts/convert_graphene_pfhxa.py` |
+| `data/processed/quaternized_chitosan.csv` | Gels 2026 (gels12010014) | 12 条 / PFOS+PFOA+PFBS+PFHxA | 季铵化壳聚糖水凝胶吸附容量+去除率，6 条短链 | `scripts/convert_quaternized_chitosan.py` |
+| `data/processed/ix_resin_competitive.csv` | Water 2026 (w18151869) | 10 条 / 10 种 PFAS | IX 树脂竞争吸附容量，6 条短链 | `scripts/convert_ix_resin_competitive.py` |
+| `data/processed/banana_peel_biochar.csv` | Toxics 2026 (toxics14030204) | 9 条 / PFBA+PFBS+PFHxA+GenX | 香蕉皮石墨化生物炭去除率，9 条短链 | `scripts/convert_banana_peel_biochar.py` |
+| `data/processed/beta_cd_tripod.csv` | npj Clean Water 2025 (s41545-025-00519-6) | 8 条 / 5 种 PFAS | 环糊精聚合物容量+去除率，6 条短链 | `scripts/convert_beta_cd_tripod.py` |
+| `data/processed/cu_hismox_mof.csv` | Small 2025 (smll e10000) | 7 条 / 5 种短链 PFAS | Cu-MOF 捕集容量+去除率，7 条短链 | `scripts/convert_cu_hismox_mof.py` |
+| `data/processed/fluoropolymer_sorbent.csv` | Nat Commun 2024 (s41467-024-52690-y) | 6 条 / 6 种 PFAS | 氟聚合物树脂吸附容量，4 条短链 | `scripts/convert_fluoropolymer_sorbent.py` |
+| `data/processed/reed_straw_biochar.csv` | Sci. Total Environ. 2024 (174223) | 6 条 / PFBA+PFPeA | Fe/Cu 改性芦苇秸秆生物炭容量，6 条短链 | `scripts/convert_reed_straw_biochar.py` |
+| `data/processed/alginate_cafe_biochar.csv` | Environ. Res. 2025 (122395) | 3 条 / PFHxA+PFBS+PFBA | 海藻酸 Ca-Fe 生物炭微球容量+去除率，3 条短链 | `scripts/convert_alginate_cafe_biochar.py` |
+| `data/processed/polyaniline_nanofiber_genx.csv` | Fibers 2025 (fib13040042) | 3 条 / GenX | PANI 纳米纤维吸附容量 1 条 + 去除率 2 条 | `scripts/convert_polyaniline_nanofiber.py` |
+| `data/processed/subnanoporous_biochar_pfba.csv` | Tsinghua 2026 | 1 条 / PFBA | 亚纳米孔活性生物炭 Langmuir 容量 141.8 mg/g | `scripts/convert_subnanoporous_biochar.py` |
 
-> 总计 640 条（去除率 579 + 吸附容量 61），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石六类吸附剂。
+> 总计 686 条（去除率 613 + 吸附容量 88，短链 343 条），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石六类吸附剂，以及 PFBA/PFBS/PFPeS/PFHxA/PFHxS/GenX 等核心短链物质。
 
 论文 PDF 下载（仅开放获取）：
 

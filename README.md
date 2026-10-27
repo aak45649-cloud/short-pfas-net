@@ -106,7 +106,7 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 
 ### 真实数据接入
 
-本项目已从公开论文提取了十四个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
+本项目已从公开论文提取了二十五个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
 
 | 数据集 | 来源 | 规模 | 内容 | 复现脚本 |
 |--------|------|------|------|---------|
@@ -124,8 +124,19 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 | `data/processed/alginate_cafe_biochar.csv` | Environ. Res. 2025 (122395) | 3 条 / PFHxA+PFBS+PFBA | 海藻酸 Ca-Fe 生物炭微球容量+去除率，3 条短链 | `scripts/convert_alginate_cafe_biochar.py` |
 | `data/processed/polyaniline_nanofiber_genx.csv` | Fibers 2025 (fib13040042) | 3 条 / GenX | PANI 纳米纤维吸附容量 1 条 + 去除率 2 条 | `scripts/convert_polyaniline_nanofiber.py` |
 | `data/processed/subnanoporous_biochar_pfba.csv` | Tsinghua 2026 | 1 条 / PFBA | 亚纳米孔活性生物炭 Langmuir 容量 141.8 mg/g | `scripts/convert_subnanoporous_biochar.py` |
+| `data/processed/nfbs_pei_magnetic.csv` | ACS Omega 2024 (acsomega.4c07159) | 7 条 / 7 种 PFAS | NFBS-PEI 磁性纳米吸附剂 Langmuir 容量，6 条短链 | `scripts/convert_nfbs_pei_magnetic.py` |
+| `data/processed/pmos_pfba.csv` | J. Hazard. Mater. 2023 (131047) | 5 条 / PFBA | 功能化 PMO 介孔有机硅 Langmuir 容量，5 条短链 | `scripts/convert_pmos_pfba.py` |
+| `data/processed/cs_pei_xerogel.csv` | Chem. Eng. J. 2023 | 1 条 / PFBS | CS/PEI 干凝胶吸附容量 305 mg/g | `scripts/convert_cs_pei_xerogel.py` |
+| `data/processed/mof808_pfbs.csv` | ACS Omega 2025 (acsomega.5c05815) | 8 条 / PFBS | MOF-808 四种衍生物 Langmuir qmax 95–837 mg/g | `scripts/convert_mof808_pfbs.py` |
+| `data/processed/pa_microplastics.csv` | Environ. Res. 2023 (114834) | 4 条 / PFBA+PFPeA+PFHxA | PA 微塑料 Langmuir qmax + 去除率 | `scripts/convert_pa_microplastics.py` |
+| `data/processed/hydrophobic_pac.csv` | ACS EST Water 2025 (acsestwater.4c01222) | 7 条 / PFBS+PFBA | 疏水化 PAC 动力学容量 + polyDADMAC-GAC 容量 | `scripts/convert_hydrophobic_pac.py` |
+| `data/processed/aptes_diatomite.csv` | Sci. Rep. 2026 (s41598-026-41388-4) | 3 条 / PFBS | APTES 硅藻土 Langmuir 容量 + 去除率 + GAC 容量 | `scripts/convert_aptes_diatomite.py` |
+| `data/processed/bsa_pei_pfas.csv` | ACS Appl. Mater. Interfaces 2026 (acsami.5c13467) | 3 条 / PFBA+PFBS+GenX | BSA-PEI 蛋白吸附剂实测容量 | `scripts/convert_bsa_pei_pfas.py` |
+| `data/processed/gac_f400_competitive.csv` | J. Hazard. Mater. 2023 (132378) | 3 条 / PFBS+4:2FTS+PFBA | GAC F400 单溶质平衡容量 | `scripts/convert_gac_f400_competitive.py` |
+| `data/processed/cacbm_pfas.csv` | ACS EST Water 2025 (acsestwater.5c00641) | 4 条 / PFBA+PFBS | 球磨胶体活性炭 Langmuir + PSO 容量 | `scripts/convert_cacbm_pfas.py` |
+| `data/processed/fsfac_pfbs.csv` | Chem. Eng. J. 2026 (176796) | 4 条 / PFBS | 氟化超细活性炭 PFBS 去除率 | `scripts/convert_fsfac_pfbs.py` |
 
-> 总计 686 条（去除率 613 + 吸附容量 88，短链 343 条），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石六类吸附剂，以及 PFBA/PFBS/PFPeS/PFHxA/PFHxS/GenX 等核心短链物质。
+> 总计 735 条（去除率 620 + 吸附容量 130，短链 391 条），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石 / MOF / 聚合物网络 / 蛋白基吸附剂 / 微塑料等吸附剂，以及 PFBA/PFBS/PFPeA/PFPeS/PFHxA/PFHxS/GenX/4:2FTS 等核心短链物质。
 
 论文 PDF 下载（仅开放获取）：
 

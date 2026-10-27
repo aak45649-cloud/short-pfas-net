@@ -141,6 +141,35 @@
 
 **总数据规模：686 条**（去除率 613 + 吸附容量 88，短链 343 条）。
 
+## 七·续二、本地文献库扩样本（2026-10-27 第三批：8 篇 / 39 条）
+
+响应「先把能够提取的数据全部先进行提取」，从本地 600 篇文献库继续提取 8 篇高价值论文，
+全部聚焦核心短链 PFAS（PFBA/PFBS/PFHxA/PFPeA/GenX/4:2FTS），共 39 条（全部短链）：
+
+| 数据文件 | 来源 | 条数 | 吸附剂类型 | 关键发现 |
+|---------|------|------|-----------|---------|
+| `mof808_pfbs.csv` | ACS Omega 2025（MOF-808 衍生物） | 8 | MOF | MOF-808 配体官能化（FA/AA/TFA/AF）使 PFBS Langmuir qmax 从 385 升至 837 mg/g，官能化带来 2 倍增益 |
+| `pa_microplastics.csv` | Environ. Res. 2023（PA 尼龙微塑料） | 4 | 微塑料 | 微塑料对短链吸附容量仅 ~0.19–0.20 mg/g，PFBA 去除率 99%——微塑料是"伪吸附"（表面积小）低值样本 |
+| `hydrophobic_pac.csv` | ACS EST Water 2025（疏水化 PAC） | 7 | 活性炭 | WWPAC/AWPAC 对 PFBS 动力学容量 40.45–65.39 mg/g；polyDADMAC-GAC 对 PFBA 167.5 mg/g |
+| `aptes_diatomite.csv` | Sci. Rep. 2026（APTES 硅藻土） | 3 | 硅藻土 | APTES 硅藻土 PFBS Langmuir 17.97 mg/g、去除率 89.90%，优于 GAC 基准 14.49 mg/g |
+| `bsa_pei_pfas.csv` | ACS Appl. Mater. Interfaces 2026（BSA-PEI） | 3 | 蛋白基 | 蛋白吸附剂对短链容量 0.3–1.12 mg/g（Freundlich R²>0.99），引入蛋白基新类别 |
+| `gac_f400_competitive.csv` | J. Hazard. Mater. 2023（GAC F400） | 3 | 活性炭 | 单溶质平衡容量 PFBS 0.31 / 4:2FTS 0.26 / PFBA 0.22 mmol/g（换算 mg/g），短链在 GAC 上容量偏低 |
+| `cacbm_pfas.csv` | ACS EST Water 2025（球磨胶体活性炭） | 4 | 活性炭 | 球磨胶体活性炭 PFBA/PFBS Langmuir qmax（µmol/g 换算）+ PSO qe 4.69/15.27 mg/g |
+| `fsfac_pfbs.csv` | Chem. Eng. J. 2026（氟化超细活性炭） | 4 | 活性炭 | 氟化超细活性炭 SFAC/FSFAC 在 2 ppm/50 ppb 下 PFBS 去除率 70–90% |
+
+**关键洞察**：
+1. **吸附剂类型再扩容**：新增 MOF、微塑料、硅藻土、蛋白基四类，吸附剂类别从 7 类扩至 11 类，
+   进一步提升模型对"吸附剂结构→短链亲和力"的泛化空间。
+2. **微塑料低值样本**：PA 微塑料对短链容量仅 ~0.2 mg/g，与改性沸石（≤25%）、香蕉皮生物炭（6.07 mg/g）
+   共同构成"难去除"低值锚点，持续缓解去除率右偏。
+3. **官能化增益可量化**：MOF-808 配体官能化使 PFBS qmax 从 385→837 mg/g（+117%），
+   为模型提供了"同一骨架、不同表面化学"的对照样本，利于学习表面化学与链长交互。
+4. **短链容量单位换算规范化**：mmol/g、µmol/g、ppm 统一换算为 mg/g 与 mg/L（游离酸摩尔质量，
+   PFBS 300.10 / PFBA 214.04 / 4:2FTS 328.14 g/mol），保证跨文献可比性。
+
+**总数据规模：735 条**（去除率 620 + 吸附容量 130，短链 391 条），PFAS 物质 23 种，
+数据集 25 个，吸附剂 11 类。
+
 ## 七、已交付的自动化工具
 
 | 工具 | 用途 |

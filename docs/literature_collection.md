@@ -82,6 +82,14 @@
 | 1511 | Toxics, 2026 (10.3390/toxics14030204) | 香蕉皮 ZnCl2 石墨化生物炭去除 PFBA/PFBS/PFHxA/GenX | ✅ 已提取 9 条（`banana_peel_biochar.csv`，全短链，生物炭类） |
 | 238 | RSC Adv., 2026 | 椰壳活性炭 EDA/CTAB 改性吸附短链 PFBA/PFHxA | ⏸ 短链容量/去除率在 SI 图中（正文仅长链 PFOSA 精确值），待补 SI |
 | 124 | Environ. Pollut., 2024 | AER + UV/亚硫酸盐吸附降解 PFPrA/PFHxA/GenX | ⏸ 短链数值在正文图中（无精确表格值），跳过 |
+| 1579 | ACS Omega, 2025 (10.1021/acsomega.5c05815) | MOF-808 四种衍生物（FA/AA/TFA/AF）吸附 PFBS | ✅ 已提取 8 条（`mof808_pfbs.csv`，全短链，MOF 类；Langmuir qmax 95–837 mg/g） |
+| 2371 | Environ. Res., 2023 (10.1016/j.envres.2023.114834) | PA 尼龙微塑料吸附 PFBA/PFPeA/PFHxA | ✅ 已提取 4 条（`pa_microplastics.csv`，全短链，微塑料类；含 PFBA 99% 去除率） |
+| 1788 | ACS EST Water, 2025 (10.1021/acsestwater.4c01222) | 疏水化 PAC 吸附 PFBS + polyDADMAC-GAC 吸附 PFBA | ✅ 已提取 7 条（`hydrophobic_pac.csv`，全短链，活性炭类；PSO qe 40.45–65.39 mg/g + 167.5 mg/g） |
+| 0033 | Sci. Rep., 2026 (10.1038/s41598-026-41388-4) | APTES 硅藻土吸附 PFBS + GAC 基准 | ✅ 已提取 3 条（`aptes_diatomite.csv`，全短链，含 Langmuir 17.97 mg/g + 89.90% 去除率） |
+| 0999 | ACS Appl. Mater. Interfaces, 2026 (10.1021/acsami.5c13467) | BSA-PEI 蛋白吸附剂捕集 PFBA/PFBS/GenX | ✅ 已提取 3 条（`bsa_pei_pfas.csv`，全短链，蛋白基类；实测 qmax 0.3–1.12 mg/g） |
+| 0004 | J. Hazard. Mater., 2023 (10.1016/j.jhazmat.2023.132378) | GAC F400 单溶质吸附短链 PFAS | ✅ 已提取 3 条（`gac_f400_competitive.csv`，全短链，活性炭类；PFBS/4:2FTS/PFBA 平衡容量） |
+| 0274 | ACS EST Water, 2025 (10.1021/acsestwater.5c00641) | 球磨胶体活性炭（CACBM）吸附 PFBA/PFBS | ✅ 已提取 4 条（`cacbm_pfas.csv`，全短链，活性炭类；Langmuir + PSO 容量） |
+| 0107 | Chem. Eng. J., 2026 (10.1016/j.cej.2026.176796) | 氟化超细活性炭（FSFAC）PFBS 去除率 | ✅ 已提取 4 条（`fsfac_pfbs.csv`，全短链，活性炭类；70–90% 去除率） |
 
 ---
 

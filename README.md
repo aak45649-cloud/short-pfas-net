@@ -106,7 +106,7 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 
 ### 真实数据接入
 
-本项目已从公开论文提取了三十一个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
+本项目已从公开论文提取了三十四个真实数据集（因版权，CSV 不直接入库，用脚本复现）：
 
 | 数据集 | 来源 | 规模 | 内容 | 复现脚本 |
 |--------|------|------|------|---------|
@@ -141,8 +141,11 @@ python scripts/train.py --data /path/to/your.csv --target adsorption_capacity --
 | `data/processed/ppy_carbon_cloth.csv` | Adv. Sci. 2026 (advs.76133) | 3 条 / TFA+PFBA+GenX | PPy@P-CF 导电碳布 Langmuir qm 283–572 mg/g | `scripts/convert_ppy_carbon_cloth.py` |
 | `data/processed/ppn6_fndmb.csv` | JACS 2025 (jacs.5c04689) | 2 条 / PFPeA+PFBS | 功能化多孔聚合物网络 PPN-6 平衡容量 607–1050 mg/g | `scripts/convert_ppn6_fndmb.py` |
 | `data/processed/beta_cd_go_pfba.csv` | Chem. Eur. J. 2023 (chem.202301854) | 2 条 / PFBA | β-CD-GO 对 PFBA 去除率 65%（vs GAC 70%） | `scripts/convert_beta_cd_go_pfba.py` |
+| `data/processed/wood_ac_pfhxa.csv` | J. Environ. Chem. Eng. 2024 (jece.2024.114855) | 1 条 / PFHxA | 蒸汽活化木质活性炭 PFHxA 最大吸附量 3135 mg/g | `scripts/convert_wood_ac_pfhxa.py` |
+| `data/processed/miex_gold_pfhxs.csv` | Appl. Sci. 2023 (app13106263) | 4 条 / PFHxS | MIEX GOLD 磁性离子交换树脂去除率 91–100%（含 NOM/无机干扰） | `scripts/convert_miex_gold_resin.py` |
+| `data/processed/gac_ier_competitive_2026.csv` | J. Environ. Manage. 2026 (jenvman.2026.130333) | 2 条 / PFBS+PFBA | GAC F400 竞争吸附 PFBS 39.2 mg/g；Purolite PFA694E 树脂 PFBA 0.58 mg/g | `scripts/convert_gac_ier_competitive_2026.py` |
 
-> 总计 768 条（去除率 628 + 吸附容量 155，短链 424 条），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石 / MOF / 聚合物网络 / 蛋白基吸附剂 / 微塑料等吸附剂，以及 PFBA/PFBS/PFPeA/PFPeS/PFHxA/PFHxS/GenX/4:2FTS/TFA 等核心短链物质。
+> 总计 775 条（去除率 632 + 吸附容量 158，短链 431 条），覆盖膜 / 生物炭 / 活性炭 / 离子交换树脂 / 纳米吸附剂 / 沸石 / MOF / 聚合物网络 / 蛋白基吸附剂 / 微塑料等吸附剂，以及 PFBA/PFBS/PFPeA/PFPeS/PFHxA/PFHxS/GenX/4:2FTS/TFA 等核心短链物质。
 
 论文 PDF 下载（仅开放获取）：
 
@@ -151,6 +154,46 @@ python scripts/download_papers.py --doi 10.3390/molecules31071100   # MDPI 走 r
 ```
 
 详见 `docs/data_insights.md`（数据洞察）与 `docs/literature_collection.md`（文献采集清单）。
+
+## 实验结果（775 条真实文献数据，5 种子 × 25% 留出）
+
+**核心问题**：短链 PFAS 数据稀缺时，纯图结构学习是否失效？化学先验与架构选择各贡献多少？
+
+### 1. 描述符先验 vs 纯 GNN
+
+| 方法 | 短链 (n=292) RMSE | 短链 R² | 全库 (n=628) RMSE | 全库 R² |
+|------|------------------|---------|------------------|---------|
+| 常数基线 | 17.26 | -0.02 | 17.53 | -0.01 |
+| 纯 GNN（图结构） | 14.01 | +0.23 | 15.89 | +0.12 |
+| 描述符 + 梯度提升树 | 13.16 | +0.32 | 13.12 | +0.44 |
+| **GNN + 描述符先验** | **12.48** | **+0.41** | **12.22** | **+0.47** |
+
+样本从单篇论文的几十条扩充到全库 768 条后，纯 GNN 的 R² 由 **-1.79（完全失效）回升至 +0.23**，
+证明"小样本过拟合"的根因是数据量而非图结构学习本身；但描述符先验注入仍带来稳定增益。
+
+![Descriptor prior vs pure GNN](docs/figures/descriptor_vs_gnn_all.png)
+
+### 2. 训练策略与架构消融
+
+| 方法 | 短链 (n=296) RMSE | 短链 R² | 全库 (n=632) RMSE | 全库 R² |
+|------|------------------|---------|------------------|---------|
+| GIN + 描述符（固定 80 epoch） | 12.11 ± 2.10 | -0.03 ± 1.02 | 13.82 ± 0.75 | +0.32 ± 0.30 |
+| GIN + 描述符 + 早停/余弦退火 | 10.89 ± 1.33 | +0.22 ± 0.73 | **12.12 ± 0.82** | **+0.49 ± 0.19** |
+| **GAT + 描述符 + 早停** | **9.17 ± 1.29** | **+0.45 ± 0.47** | 12.37 ± 2.09 | +0.49 ± 0.15 |
+| GIN + 描述符 + 早停 + 3-seed 集成 | 11.04 ± 1.48 | +0.19 ± 0.75 | 12.43 ± 0.36 | +0.47 ± 0.19 |
+
+- **早停是必要项**：基线 R² 标准差达 ±1.02（固定 epoch 训练极不稳定），加入早停后短链 RMSE −10%、全库 R² +0.17。
+- **GAT 在短链子域领先 16%**：短链分子小、局部官能团差异主导，注意力机制优于求和聚合。
+- **集成以降方差为主**：全库 RMSE 标准差降至 0.36，但均值略逊于单模型早停。
+
+![Model improvement ablation](docs/figures/model_improvement.png)
+
+复现：
+
+```bash
+python scripts/descriptor_vs_gnn_all.py        # 描述符先验 vs 纯 GNN
+python scripts/model_improvement_experiment.py # 早停 / GAT / 集成消融
+```
 
 ## 迁移学习工作流
 

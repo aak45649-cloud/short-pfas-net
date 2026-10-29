@@ -96,6 +96,25 @@
 | 0099 | Adv. Sci., 2026 (10.1002/advs.76133) | PPy@P-CF 导电碳布捕集 TFA/PFBA/GenX | ✅ 已提取 3 条（`ppy_carbon_cloth.csv`，全短链；Langmuir qm 283.2/572.1/510.2 mg/g） |
 | 0815 | JACS, 2025 (10.1021/jacs.5c04689) | 功能化多孔聚合物网络 PPN-6 捕集 PFPeA/PFBS | ✅ 已提取 2 条（`ppn6_fndmb.csv`，全短链；平衡容量 2.3/3.5 mmol/g） |
 | 1987 | Chem. Eur. J., 2023 (10.1002/chem.202301854) | β-CD-GO 捕集 PFBA | ✅ 已提取 2 条（`beta_cd_go_pfba.csv`，全短链；65% 去除率 vs GAC 70%） |
+| 2463 | J. Environ. Chem. Eng., 2024 (10.1016/j.jece.2024.114855) | 蒸汽活化木质活性炭（AC850C-2h）吸附 PFHxA | ✅ 已提取 1 条（`wood_ac_pfhxa.csv`，短链；最大吸附量 3135 mg/g，多层吸附无平台） |
+| 1503 | Appl. Sci., 2023 (10.3390/app13106263) | MIEX GOLD 磁性离子交换树脂去除 PFHxS | ✅ 已提取 4 条（`miex_gold_pfhxs.csv`，全短链；91.00–100% 去除率，含 NOM/无机干扰） |
+| 1007 | J. Environ. Manage., 2026 (10.1016/j.jenvman.2026.130333) | GAC F400 vs Purolite PFA694E 竞争吸附 | ✅ 已提取 2 条（`gac_ier_competitive_2026.csv`，全短链；PFBS 39.2 mg/g、PFBA 0.58 mg/g） |
+
+### 本轮排除的候选（及原因）
+
+| 编号 | 论文 | 排除原因 |
+|------|------|---------|
+| 0145 | Removal of short-chain PFAS and novel alternatives (2026) | 综述，无精确数据表 |
+| 0305 | Cooperative Molecular Interaction ultrashort/short PFAS | 与已提取 `acsomega.4c07159`（NFBS-PEI）重复 |
+| 0004 | Coexisting ions and long-chain PFAS | 与已提取 `gac_f400_competitive.csv` 重复 |
+| 0033 | Amine-functionalized diatomite (Sci. Rep. 2026) | 与已提取 `aptes_diatomite.csv` 重复 |
+| 0107 | Fluorinated activated carbon (Chem. Eng. J. 2026) | 与已提取 `fsfac_pfbs.csv` 重复 |
+| 0361 | AmphoRes IX resin | qmax 为 μg/g 级"表观常数"（R² 0.63–0.77），作者明示非真实容量 |
+| 0023 | Confined water-encapsulated AC | 精确 qm 仅在 SI Table S3（本地无补充材料），正文仅给范围 374.86–553.08 |
+| 0622 / 1033 / 0005 / 0576 / 0510 / 0898 / 2533 / 0994 | 各类综述 | 无原始实验数据 |
+| 0320 | Membrane capacitive deionization | 28.75 mg/g 为电化学脱盐容量，非吸附容量 |
+| 0066 | Removal/fate during surface water treatment | 仅长链 ng/g 级动力学参数，无短链精确表 |
+| 0132 / 0688 | 电化学降解 | 非吸附过程 |
 
 ---
 

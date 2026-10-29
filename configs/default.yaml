@@ -1,14 +1,22 @@
 # ShortPFAS-Net default configuration
+#
+# Training defaults reflect the ablation in scripts/model_improvement_experiment.py:
+# early stopping + cosine annealing materially improves both short-chain and
+# full-corpus performance, and GAT is the strongest encoder on short-chain subsets.
 
 model:
-  gnn_type: "gin"        # "gin" or "gat"
+  gnn_type: "gin"        # "gin" or "gat" (GAT best on short-chain, GIN best on full corpus)
   hidden_dim: 64
   dropout: 0.1
+  use_descriptors: true  # inject RDKit descriptor priors (--descriptors)
 
 training:
-  epochs: 30
+  epochs: 200            # upper bound; early stopping usually triggers at 50-130
   batch_size: 32
   learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  early_stopping: true
+  patience: 20
   seed: 42
 
 data:
